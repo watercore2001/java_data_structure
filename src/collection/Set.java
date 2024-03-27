@@ -1,8 +1,8 @@
 package collection;
 
 /**
- * The only difference between Set and Collection is that
- * elements in Set cannot be duplicated.
+ * A collection that contains no duplicate elements.
+ * Set has same interface as Collection.
  * @param <E>
  */
 public interface Set<E> extends Collection<E>{

@@ -15,8 +15,5 @@ public class TestIterable<E> implements Iterable<E> {
     }
 
     public void main(){
-        for (E i : this){
-
-        }
     }
 }
