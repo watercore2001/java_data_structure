@@ -2,7 +2,7 @@ package collection;
 
 import iter.ListIterator;
 
-import iter.Iterator;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**

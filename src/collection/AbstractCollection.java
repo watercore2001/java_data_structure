@@ -1,7 +1,7 @@
 package collection;
 
-import iter.Iterator;
 import java.lang.StringBuilder;
+import java.util.Iterator;
 
 /**
  * This class provides a skeletal implementation of the Collection

@@ -1,19 +1,14 @@
 package test;
 
-// import java.lang.Iterable;
-// import java.util.Iterator;
-import iter.Iterable;
-import iter.Iterator;
+import collection.*;
 
-import org.junit.jupiter.api.Test;
-
-public class TestIterable<E> implements Iterable<E> {
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
+public class TestIterable<E> {
 
     public void main(){
+        Collection<String> c1 = new ArrayList<>();
+        c1.add("a");
+        c1.add("b");
+
+        //for (String s : c1){}
     }
 }

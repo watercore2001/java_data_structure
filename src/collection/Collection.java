@@ -1,7 +1,5 @@
 package collection;
 
-import iter.Iterable;
-
 /**
  * The iterators of Collections are fail-fast:
  * if the list is structurally modified at ant time after the iterator

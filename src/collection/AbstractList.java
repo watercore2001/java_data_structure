@@ -1,9 +1,9 @@
 package collection;
 
-import iter.Iterator;
 import iter.ListIterator;
 
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**

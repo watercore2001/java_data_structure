@@ -1,5 +1,7 @@
 package iter;
 
+import java.util.Iterator;
+
 /**
  * An iterator for lists that allows the programmer
  * to traverse the list in either direction, modify
