@@ -3,9 +3,7 @@ package collection;
 import java.util.EmptyStackException;
 
 /**
- * The Stack class represents a last-in-first-out
- * stack of objects.
- * @param <E>
+ * The Stack class represents a last-in-first-out stack of objects.
  */
 public class Stack<E> extends ArrayList<E> {
     public Stack(){

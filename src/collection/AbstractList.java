@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Implement fail-fast Iterator by modCount
+ * This class provides a skeletal implementation of the List Interface to minimize
+ * the effort required to implement this interface backed
+ * by a "random access" data store(such as an array).
  * @param <E>
  */
 public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E>{
@@ -23,8 +25,6 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
     }
 
     protected AbstractList() {}
-
-    // Query Operation
 
     private class Itr implements Iterator<E> {
         /**
@@ -125,17 +125,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         }
 
         @Override
-        public int nextIndex() {
-            return this.cursor;
-        }
-
-        @Override
-        public int previousIndex() {
-            return this.cursor - 1;
-        }
-
-        @Override
-        public void set(E e) {
+        public boolean set(E e) {
             if (this.lastReturned < 0) {
                 throw new IllegalStateException();
             } else {
@@ -144,6 +134,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
                 try {
                     AbstractList.this.set(this.lastReturned, e);
                     this.expectedModCount = AbstractList.this.modCount;
+                    return true;
                 } catch (IndexOutOfBoundsException ex) {
                     throw new ConcurrentModificationException();
                 }
@@ -151,14 +142,15 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         }
 
         @Override
-        public void add(E e) {
+        public boolean add(E e) {
             this.checkModification();
             try {
                 int i = this.cursor;
                 AbstractList.this.add(i, e);
                 this.lastReturned = -1;
-                this.cursor = i+  1;
+                this.cursor = i+1;
                 this.expectedModCount = AbstractList.this.modCount;
+                return true;
             } catch (IndexOutOfBoundsException ex){
                 throw new ConcurrentModificationException();
             }
@@ -178,61 +170,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         return new ListItr(index);
     }
 
-    @Override
-    public ListIterator<E> listIterator() {return this.listIterator(0);}
 
     @Override
-    public int indexOf(Object o) {
-        for (ListIterator<E> iter = this.listIterator(); iter.hasNext(); ){
-            if(o==null ? iter.next() == null : o.equals(iter.next())){
-                return iter.previousIndex();
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        for (ListIterator<E> iter = this.listIterator(this.size()); iter.hasPrevious(); ){
-            if(o==null ? iter.previous() == null : o.equals(iter.previous())){
-                // nextIndex() always== preIndex()+1
-                return iter.nextIndex();
-            }
-        }
-        return -1;
-    }
-
-
-    // Modification Operation
-
-    @Override
-    public boolean add(E var) {
-        this.add(this.size(), var);
-        return true;
-    }
-
-    /**
-     * Use ListIterator to remove item but not Iterator.
-     * If ListIterator.remove() requires linear time with size,
-     * this implementation requires quadratic time.
-     * @param fromIndex index of first element to be removed
-     * @param toIndex index after last element to be removed
-     */
-    protected void removeRange(int fromIndex, int toIndex){
-        ListIterator<E> it = listIterator(fromIndex);
-        for (int i=0, n=toIndex-fromIndex; i<n; i++){
-            it.next();
-            it.remove();
-        }
-    }
-
-    /**
-     * Use removeRange() to implement has two difference with clear() implementation in AbstractList
-     * 1. Use ListIterator rather than Iterator, it may be faster.
-     * 2. Do not use iter.hasNext() to determine whether to stop.
-     */
-    @Override
-    public void clear() {
-        removeRange(0, size());
-    }
+    public boolean add(E var) {return add(size(), var);};
 }

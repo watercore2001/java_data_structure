@@ -2,13 +2,11 @@ package collection;
 
 import iter.ListIterator;
 
-import javax.swing.*;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 
 /**
  * Doubly-linked list implementation.
- * @param <E>
  */
 public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
     /**
@@ -30,7 +28,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
 
     /**
      *
-     * @param index
+     * @param index index
      * @return the (non-null) Node at the specified element index
      */
     private Node<E> nodeByIndex(int index){
@@ -81,13 +79,10 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
     }
 
     /**
-     * good implementation: 分开处理 prev node 和 next node,
+     * 1. good implementation: 分开处理 prev node 和 next node,
      * 对于每个 node 再按照是否为 null 分开讨论
-     * bad implementation： 将情况分为 node 为第一个元素， node 为最后一个元素，
-     * node 为中间元素三种情况。
+     * 2. bad implementation： 将情况分为 node 为第一个元素， node 为最后一个元素，node 为中间元素三种情况。
      * 错误点：这三种情况存在重合，node为第一个元素的同时也可能为最后一个元素
-     * @param node
-     * @return
      */
     private E unlink(Node<E> node){
         assert node != null;
@@ -140,7 +135,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
 
         @Override
         public E next() {
-            checkForComodification();
+            checkForCoModification();
             if (!hasNext())
                 throw new NoSuchElementException();
 
@@ -158,14 +153,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
 
         @Override
         public E previous() {
-            checkForComodification();
+            checkForCoModification();
             if (!hasPrevious())
                 throw new NoSuchElementException();
             nextIndex--;
-            /**
+            /*
              * next may be null because we only check hasPrevious()
              * but not hasNext()
-             *
              * null will be null when have iter the last item
              */
             lastReturned = next = (next == null) ? last : next.prev;
@@ -173,26 +167,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
         }
 
         @Override
-        public int nextIndex() {
-            return nextIndex;
-        }
-
-        @Override
-        public int previousIndex() {
-            return nextIndex-1;
-        }
-
-        @Override
-        public void set(E e) {
+        public boolean set(E e) {
             if (lastReturned == null)
                 throw new IllegalStateException();
-            checkForComodification();
+            checkForCoModification();
             lastReturned.item = e;
+            return true;
         }
 
         @Override
         public void remove() {
-            checkForComodification();
+            checkForCoModification();
             if (lastReturned == null)
                 throw new IllegalStateException();
             Node<E> lastNext = lastReturned.next;
@@ -209,16 +194,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
         }
 
         @Override
-        public void add(E e) {
-            checkForComodification();
+        public boolean add(E e) {
+            checkForCoModification();
             lastReturned = null;
             if (next==null)
                 linkLast(e);
             else
                 linkBefore(e, next);
+            return true;
         }
 
-        final void checkForComodification() {
+        final void checkForCoModification() {
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
         }

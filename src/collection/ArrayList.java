@@ -88,19 +88,21 @@ public class ArrayList<E> extends AbstractList<E>{
     }
 
     @Override
-    public void set(int index, E e) {
+    public boolean set(int index, E e) {
         rangeCheck(index);
         elementData[index] = e;
+        return true;
     }
 
     @Override
-    public void add(int index, E e) {
+    public boolean add(int index, E e) {
         rangeCheck(index);
         modCount++;
         if (size == elementData.length) grow();
         System.arraycopy(elementData, index, elementData, index+1, size-index);
         elementData[index] = elementData;
         size++;
+        return true;
     }
 
 

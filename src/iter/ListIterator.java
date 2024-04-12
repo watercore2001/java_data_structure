@@ -3,14 +3,11 @@ package iter;
 import java.util.Iterator;
 
 /**
- * An iterator for lists that allows the programmer
- * to traverse the list in either direction, modify
- * the list during iteration, and obtain the iterator's
- * current position in the list.
+ * An iterator for lists that allows the programmer to traverse the list in either direction, modify
+ * the list during iteration, and obtain the iterator current position in the list.
  * A ListIterator has no current element: its cursor position
- * always lies between the element that would be returned by a call
- * to previous() and the element that would be returned by a call
- * to next()
+ * always lies between the element that would be returned by a call to previous()
+ * and the element that would be returned by a call to next()
  *
  * @param <E>
  */
@@ -23,17 +20,14 @@ public interface ListIterator<E> extends Iterator<E> {
     E next();
     boolean hasPrevious();
     E previous();
-    int nextIndex();
-    int previousIndex();
 
-    // Modification Operations
 
     /**
      * Replace the last item returned by next() or previous() with
      * the specified element
      * @param e the element to replace
      */
-    void set(E e);
+    boolean set(E e);
 
     /**
      * Remove the last item returned next() or previous()
@@ -48,5 +42,5 @@ public interface ListIterator<E> extends Iterator<E> {
      * returned by previous().
      * @param e the element to insert
      */
-    void add(E e);
+    boolean add(E e);
 }

@@ -4,10 +4,8 @@ import java.lang.StringBuilder;
 import java.util.Iterator;
 
 /**
- * This class provides a skeletal implementation of the Collection
- * interface, to minimize the effort required to implement this interface.
- *
- * @param <E>
+ * This class provides a skeletal implementation of the Collection interface,
+ * to minimize the effort required to implement this interface.
  */
 public abstract class AbstractCollection<E> implements Collection<E> {
     /**
@@ -15,24 +13,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      */
     protected AbstractCollection(){}
 
-    // Query Operations
-
-    @Override
-    public boolean isEmpty() {
-        return this.size() == 0;
-    }
-
     /**
-     * If call to remove(iter.next()), current Iterator will be invalid anymore
+     * Make this method abstract
+     * @return an iterator over the elements contained in this collection
      */
-    @Override
-    public void clear() {
-        Iterator<E> iter = this.iterator();
-        while(iter.hasNext()){
-            iter.next();
-            iter.remove();
-        }
-    }
+    public abstract Iterator<E> iterator();
+
 
     @Override
     public boolean contains(Object var) {
@@ -45,9 +31,6 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     }
 
 
-
-    // Modification Operation
-
     /**
      * The most important thing here is null.equals() will throw an Exception.
      * So we must
@@ -56,7 +39,6 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * @param var Use type Object but not type E,
      *            because We can use many type to denote type E by
      *            equals(Object o) method
-     * @return
      */
     @Override
     public boolean remove(Object var){
@@ -71,7 +53,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
             }
         } else {
             while (iter.hasNext()){
-                if (var.equals(iter.hasNext())){
+                if (var.equals(iter.next())){
                     iter.remove();
                     return true;
                 }
@@ -83,8 +65,6 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
     /**
      * A more elegant implementation but little slower
-     * @param var
-     * @return
      */
     private boolean removeV2(Object var){
         for (Iterator<E> iter = this.iterator(); iter.hasNext();){
@@ -96,49 +76,6 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return false;
     }
 
-    // Bulk Operations
-    @Override
-    public boolean containsAll(Collection<?> collection2) {
-        for (Iterator<?> iter = collection2.iterator(); iter.hasNext(); ){
-            if (!this.contains(iter.next())) return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> collection2) {
-        boolean result = false;
-        Iterator<? extends E> iter = collection2.iterator();
-
-        while (iter.hasNext()){
-            E addedItem = iter.next();
-            if (this.add(addedItem)){
-                result = true;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> collection2) {
-        boolean result = false;
-        /*
-         Must iterate this but not collection,
-         because we use iter to remove item in this.
-         */
-        Iterator<?> iter = this.iterator();
-
-        while (iter.hasNext()){
-            if (collection2.contains(iter.next())){
-                iter.remove();
-                result = true;
-            }
-        }
-        return result;
-    }
-
-
-    // String conversion
 
     @Override
     public String toString() {
