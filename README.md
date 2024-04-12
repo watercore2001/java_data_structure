@@ -39,6 +39,13 @@ ListIterator:
 
 Set extends Collection: Same interface with Collection, but No duplicate element
 
+SortedSet extends Set:
+- comparator() -> Comparator()
+- subSet(E, E)
+
+Comparator:
+- compare(E, E)
+
 > Q1: In Collection Interface, why .contains(Object), .add(E) and .remove(Object) 
 > have different type of parameter?
 > 
@@ -110,3 +117,9 @@ HashingSet:
 
 ## The Java Map Abstraction
 ![](https://obsidian-pictures-1306255178.cos.ap-beijing.myqcloud.com/20240322141615.png)
+
+### Interface: Defined by Public Methods
+
+Map:
+SortedMap:
+
