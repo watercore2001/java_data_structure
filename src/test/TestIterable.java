@@ -1,5 +1,6 @@
 package test;
 
+import Interface.Collection;
 import collection.*;
 
 public class TestIterable<E> {

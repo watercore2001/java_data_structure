@@ -1,7 +1,5 @@
 package test;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.LinkedList;
 import java.util.ListIterator;
 

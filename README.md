@@ -1,74 +1,31 @@
-# Mini Java Data Structure
+# Mini Java Data Structure And Algorithm
 [Referenced book in CS61B Course](https://inst.eecs.berkeley.edu/~cs61b/fa14/book2/data-structures.pdf)
 
 This document mainly focuses on the design principles of the Java.util Official library class system.
 
 For details of the code implementation, please refer to the source code in ./src.
 
-First of all, data structures are basically divided into Collection and Map.
+![collection](https://obsidian-pictures-1306255178.cos.ap-beijing.myqcloud.com/20240322141508.png)
+![map](https://obsidian-pictures-1306255178.cos.ap-beijing.myqcloud.com/20240322141615.png)
 
-
-## The Java Collection Abstraction
-![](https://obsidian-pictures-1306255178.cos.ap-beijing.myqcloud.com/20240322141508.png)
-### Interface: Defined by Public Methods
+## Interface: Defined by Public Methods
 
 Collection<E>: Store elements within type E, iter by iterator()
-- size()
-- contains(Object)
-- add(E)
-- remove(Object)
-- iterator() -> Iterator
 
-Iterator:
-- hasNext()
-- next()
-- remove()
+List<E> extends Collection<E>: Use Integer index
 
-List extends Collection: Use Integer index
-- get(Int)
-- Add(Int, Object)
-- remove(Int)
-- set(Int, Object)
-- listIterator(int index) -> ListIterator: Select a position to start iteration
+ListIterator<E>
 
-ListIterator:
-- hasPrevious()
-- previous()
-- set(Object)
-- add(Object)
+Set<E> extends Collection<E>: Same interface with Collection, but No duplicate element
 
-Set extends Collection: Same interface with Collection, but No duplicate element
+SortedSet<E> extends Set<E>
 
-SortedSet extends Set:
-- comparator() -> Comparator()
-- subSet(E, E)
+Comparator<E>
 
-Comparator:
-- compare(E, E)
+Map
 
-> Q1: In Collection Interface, why .contains(Object), .add(E) and .remove(Object) 
-> have different type of parameter?
-> 
-> A1: Because only in .add(E) method, we need to convert the input object to type E and store it, 
-> for the other two methods, we only use .equals(Object) to compare 
-> if the input object equals an element in the Collection.
 
-> Q2: [Why there is not .add(Object) in Iterator Interface?](https://stackoverflow.com/questions/11196561/why-there-is-no-add-method-in-iterator-interface#:~:text=The%20sole%20purpose%20of%20an,the%20case%20of%20a%20HashSet%20)
->
-> Opinion1: As the Iterator makes no guarantee about the order of iteration, the .add(Object) method
-> has unclear semantics: The added Object's "position" is unknown(before current pos or after current pos).
-> As the ListIterator guarantee the order of the iteration, we can provide the .add(Object) method
->
-> Opinion2: The behavior of an .add(Object) method is not well-defined in all cases.
-> And remove() method is more useful than .add(Object) method.
->
-> Opinion3: .add(Object) method in the Iterator will have chance to write infinite
-> loop. But I think this not make sense, because ListIterator provide .add(Object) method.
-
-> Q3: Why there is not .set(Object) in Iterator Interface?
-> 
-> A3: It's not useful
-
+```
 
 ### Abstract Class: Implementor Helper
 AbstractCollection: 
@@ -116,7 +73,7 @@ HashingSet:
 - Using Hashing Map
 
 ## The Java Map Abstraction
-![](https://obsidian-pictures-1306255178.cos.ap-beijing.myqcloud.com/20240322141615.png)
+
 
 ### Interface: Defined by Public Methods
 

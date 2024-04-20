@@ -1,5 +1,7 @@
 package collection;
 
+import Interface.Collection;
+
 import java.lang.StringBuilder;
 import java.util.Iterator;
 

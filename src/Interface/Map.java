@@ -1,8 +1,4 @@
-package map;
-
-import collection.Collection;
-import collection.Set;
-import iter.Comparable;
+package Interface;
 
 import java.io.Serializable;
 import java.util.Comparator;

@@ -1,8 +1,10 @@
-package collection;
+package Interface;
+
+import Interface.Collection;
 
 /**
  * A collection that contains no duplicate elements.
  * Set has same interface with Collection.
  */
-public interface Set<E> extends Collection<E>{
+public interface Set<E> extends Collection<E> {
 }

@@ -1,6 +1,7 @@
 package collection;
 
-import iter.ListIterator;
+import Interface.List;
+import Interface.ListIterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

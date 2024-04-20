@@ -1,6 +1,7 @@
 package collection;
 
-import iter.ListIterator;
+import Interface.List;
+import Interface.ListIterator;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -12,7 +13,7 @@ import java.util.NoSuchElementException;
  * by a "random access" data store(such as an array).
  * @param <E>
  */
-public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E>{
+public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E> {
     /**
      * The number of times this list has been structurally modified.
      * This field is used by the iterator and list iterator implementation.

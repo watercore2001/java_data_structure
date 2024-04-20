@@ -1,6 +1,7 @@
 package collection;
 
-import iter.ListIterator;
+import Interface.List;
+import Interface.ListIterator;
 
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
@@ -8,7 +9,7 @@ import java.util.NoSuchElementException;
 /**
  * Doubly-linked list implementation.
  */
-public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>{
+public class LinkedList<E> extends AbstractSequentialList<E> implements List<E> {
     /**
      * static class need generic type E
      * @param <E>
