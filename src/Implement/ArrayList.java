@@ -1,5 +1,7 @@
-package collection;
+package Implement;
 
+
+import Abstract.AbstractList;
 
 import java.util.Arrays;
 
@@ -13,7 +15,7 @@ import java.util.Arrays;
  * 3. Itr and ListItr Implementation in AbstractList are good enough for ArrayList.
  * @param <E>
  */
-public class ArrayList<E> extends AbstractList<E>{
+public class ArrayList<E> extends AbstractList<E> {
     private static final int DEFAULT_CAPACITY = 10;
     /**
      * 1. Why use Object[] but not E[]?

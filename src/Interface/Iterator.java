@@ -15,7 +15,7 @@ package Interface;
  *
  * Q2: Why there is not .set(Object) in Iterator Interface?
  *
- * A: It's not useful
+ * A: It's not useful.
  */
 public interface Iterator<E> {
     boolean hasNext();

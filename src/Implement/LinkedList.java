@@ -1,5 +1,6 @@
-package collection;
+package Implement;
 
+import Abstract.AbstractSequentialList;
 import Interface.List;
 import Interface.ListIterator;
 

@@ -1,7 +1,7 @@
 package test;
 
+import Implement.ArrayList;
 import Interface.Collection;
-import collection.*;
 
 public class TestIterable<E> {
 

@@ -1,4 +1,4 @@
-package collection;
+package Abstract;
 
 import Interface.Collection;
 
@@ -6,19 +6,15 @@ import java.lang.StringBuilder;
 import java.util.Iterator;
 
 /**
- * This class provides a skeletal implementation of the Collection interface,
- * to minimize the effort required to implement this interface.
+ * Use `iterator.hasNext()` and `iterator.next()` to implements `self.contains(Object)` method
+ * Use `iterator.remove()` to implement `self.remove(Object)`
  */
 public abstract class AbstractCollection<E> implements Collection<E> {
     /**
-     * For invocation by subclass constructors
+     * Make it protected: Only called by subclass constructors
      */
     protected AbstractCollection(){}
 
-    /**
-     * Make this method abstract
-     * @return an iterator over the elements contained in this collection
-     */
     public abstract Iterator<E> iterator();
 
 
@@ -35,40 +31,11 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
     /**
      * The most important thing here is null.equals() will throw an Exception.
-     * So we must
-     * 1. check the var is not null before call var.equals()
-     * 2. can not when iter.next().equals as we do not check iter.next()!=null
-     * @param var Use type Object but not type E,
-     *            because We can use many type to denote type E by
-     *            equals(Object o) method
+     * 1. Use var.equals() but not iter.next().equals()
+     * because we have checked that var != var.
      */
     @Override
     public boolean remove(Object var){
-        Iterator<E> iter = this.iterator();
-
-        if(var==null){
-            while (iter.hasNext()){
-                if(iter.next() == null){
-                    iter.remove();
-                    return true;
-                }
-            }
-        } else {
-            while (iter.hasNext()){
-                if (var.equals(iter.next())){
-                    iter.remove();
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * A more elegant implementation but little slower
-     */
-    private boolean removeV2(Object var){
         for (Iterator<E> iter = this.iterator(); iter.hasNext();){
             if (var==null ? iter.next() == null : var.equals(iter.next())){
                 iter.remove();
