@@ -9,11 +9,25 @@ public interface Map<K, V> {
     int size();
     boolean containsKey(Object key);
     boolean containsValue(Object Value);
+
+    /**
+     * @return null if there is no mapping for key.
+     */
     V get(Object key);
 
     // Modification
 
+    /**
+     * Add a new Entry or update an existed Entry.
+     * @return the previous value associated with key,
+     * or null if there was no mapping for key.
+     */
     V put(K key, V value);
+
+    /**
+     * @return the previous value associated with key,
+     * or null if there was no mapping for key.
+     */
     V remove(Object key);
 
 
@@ -30,11 +44,11 @@ public interface Map<K, V> {
     Set<Map.Entry<K, V>> entrySet();
 
     /**
-     * Q: [Why make Entry static](<a href="https://stackoverflow.com/questions/7416241/map-entry-interface-in-java">...</a>)
+     * Q: [Why make Entry public static](<a href="https://stackoverflow.com/questions/7416241/map-entry-interface-in-java">...</a>)
      * A: Being static means you don't need an instance of Map to refer to an Entry.
      * It makes it easy to iter map by Entry.
      */
-    static interface Entry<K, V>{
+    public static interface Entry<K, V>{
         K getKey();
         V getValue();
 

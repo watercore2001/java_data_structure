@@ -4,6 +4,7 @@ import Interface.Collection;
 
 import java.lang.StringBuilder;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Use `iterator.hasNext()` and `iterator.next()` to implements `self.contains(Object)` method
@@ -20,8 +21,8 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object var) {
-        for (Iterator<E> iter = this.iterator(); iter.hasNext();){
-            if (var==null ? iter.next() == null : var.equals(iter.next())){
+        for (E e : this) {
+            if (Objects.equals(var, e)) {
                 return true;
             }
         }
@@ -33,11 +34,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * The most important thing here is null.equals() will throw an Exception.
      * 1. Use var.equals() but not iter.next().equals()
      * because we have checked that var != var.
+     * 2. Object.equals implement this
      */
     @Override
     public boolean remove(Object var){
         for (Iterator<E> iter = this.iterator(); iter.hasNext();){
-            if (var==null ? iter.next() == null : var.equals(iter.next())){
+            if (Objects.equals(var, iter.next())){
                 iter.remove();
                 return true;
             }
